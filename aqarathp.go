@@ -11,13 +11,6 @@ import (
 	"github.com/rs/zerolog/log"
 )
 
-func Btoi(b bool) int {
-	if b {
-		return 1
-	}
-	return 0
-}
-
 type AqaraTHP struct {
 	MqttDevice
 }
