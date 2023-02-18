@@ -20,7 +20,7 @@ func logMessage(message MQTT.Message) {
 		Msg("received message")
 }
 
-func checkedJSONUnmarshal[T AqaraTHPStatus](
+func checkedJSONUnmarshal[T AqaraTHPStatus | WatterottCO2AmpelStatus](
 	message MQTT.Message,
 	out *T,
 ) error {
@@ -58,7 +58,7 @@ func checkedSubscribe(
 	return nil
 }
 
-func SubscribeJSONHelper[T AqaraTHPStatus](
+func SubscribeJSONHelper[T AqaraTHPStatus | WatterottCO2AmpelStatus](
 	mqttClient MQTT.Client,
 	topic string,
 	callback func(T),
