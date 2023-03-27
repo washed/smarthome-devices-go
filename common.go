@@ -2,6 +2,7 @@ package smarthome_devices
 
 import (
 	"encoding/json"
+	"strings"
 
 	MQTT "github.com/eclipse/paho.mqtt.golang"
 	"github.com/rs/zerolog/log"
@@ -21,7 +22,8 @@ func logMessage(message MQTT.Message) {
 }
 
 func checkedJSONUnmarshal(message MQTT.Message, out interface{}) error {
-	err := json.Unmarshal(message.Payload(), out)
+	payload := strings.Split(string(message.Payload()), "\x00")[0]
+	err := json.Unmarshal([]byte(payload), out)
 	if err != nil {
 		log.Error().
 			Str("message.Topic", string(message.Topic())).
